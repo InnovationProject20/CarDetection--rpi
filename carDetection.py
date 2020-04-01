@@ -1,15 +1,21 @@
 
+
 # OpenCV Python program to detect cars in video frame
 # import libraries of python OpenCV
 import cv2
+from PIL import Image
+import redis
+import StringIO
+import redisTest
 
 # capture frames from a video
-#cap = cv2.VideoCapture('mountainCars.avi')
-#cap = cv2.VideoCapture('video.avi')
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture('testVideo.h264')
+#cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('video.avi')
+#cap = cv2.VideoCapture('youtubeTest.h264')
 
 # Trained XML classifiers describes some features of some object we want to detect 
-car_cascade = cv2.CascadeClassifier('cars.xml')
+car_cascade = cv2.CascadeClassifier('car.xml')
 
 imageCount = 0
 frameCount = 0
@@ -28,9 +34,11 @@ while (cap.isOpened()):
 	for (x,y,w,h) in cars:
 		cv2.rectangle(frames,(x,y),(x+w,y+h),(0,0,255),2)
 		if ((frameCount % 10) == 0):
-			cv2.imwrite("frame%d.jpg" %imageCount, frames)
+			tempFrame = ("frame%d.jpg" %imageCount)
+			cv2.imwrite(tempFrame, frames)
 			ret,frames = cap.read()
 			print('Read a new frame: ', ret)
+			redisTest.setPicture(tempFrame,imageCount)
 			imageCount +=1
 		frameCount += 1
 		# Display frames in a window
