@@ -15,7 +15,7 @@ cap = cv2.VideoCapture('video.avi')
 #cap = cv2.VideoCapture('youtubeTest.h264')
 
 # Trained XML classifiers describes some features of some object we want to detect 
-car_cascade = cv2.CascadeClassifier('car.xml')
+car_cascade = cv2.CascadeClassifier('cars.xml')
 
 imageCount = 0
 frameCount = 0
