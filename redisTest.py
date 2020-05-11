@@ -5,10 +5,11 @@
 #		so this will get the variable set in the script--replace the zeros with higher numbers to check the other set variables
 from PIL import Image
 import redis
-import StringIO
+from io import BytesIO
 
 def setPicture(picture,imageCount):
-	output = StringIO.StringIO()
+	#output = StringIO.StringIO(
+	output = BytesIO()
 	#im = Image.open("/home/pi/carDetect/testMedia/testPictures/outTest1Fixed.jpg")
 	im = Image.open(picture)
 	im.save(output, format=im.format)
