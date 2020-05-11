@@ -5,7 +5,8 @@
 import cv2
 from PIL import Image
 import redis
-import StringIO
+#import StringIO
+from io import BytesIO
 import redisTest
 
 # capture frames from a video
