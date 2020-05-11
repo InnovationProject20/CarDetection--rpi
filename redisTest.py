@@ -1,7 +1,7 @@
 #to use this script type commands:
 #	(1)python redisTest.py
-#	(2)redis-cli -h (this ip address) -a (this password) --raw get 'imagedata' >(desired filename)
-#		ex: redis-cli -h (your pi ip address) -a (your pi password) redis-cli --raw get 'imagedata0' >test0.jpg
+#	(2)put into command line: redis-cli -h (pi ip address of redis container) -a (redis-cli password) --raw get 'imagedata#' >(desired filename)
+#		ex: redis-cli -h 192.168.1.110 -a nokia123 --raw get 'imagedata0' >test0.jpg
 #		so this will get the variable set in the script--replace the zeros with higher numbers to check the other set variables
 from PIL import Image
 import redis
