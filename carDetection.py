@@ -1,8 +1,8 @@
-
-
+ 
 # OpenCV Python program to detect cars in video frame
 # import libraries of python OpenCV
 import cv2
+import os
 from PIL import Image
 import redis
 #import StringIO
@@ -38,12 +38,15 @@ while (cap.isOpened()):
 			tempFrame = ("frame%d.jpg" %imageCount)
 			cv2.imwrite(tempFrame, frames)
 			ret,frames = cap.read()
-			print('Read a new frame: ', ret)
+			print('Read a new image %s frame %d' % (tempFrame, ret))
 			redisTest.setPicture(tempFrame,imageCount)
+			# remove the processed image file
+			os.remove(tempFrame)
 			imageCount +=1
 		frameCount += 1
-		# Display frames in a window
-		cv2.imshow('video2', frames)
+		# Display frames in a window, then you need to have the X display access like this
+		# docker run -ti --net=host --env="DISPLAY" --volume="$HOME/.Xauthority:/root/.Xauthority:rw" --privileged cardetect
+		#cv2.imshow('video2', frames)
 
 	# Wait for Esc key to stop
 	if cv2.waitKey(33) == 27:
@@ -52,4 +55,3 @@ while (cap.isOpened()):
 # De-allocate any associated memory usage
 cap.release()
 cv2.destroyAllWindows()
-
