@@ -11,9 +11,9 @@ import redisTest
 
 # capture frames from a video
 #cap = cv2.VideoCapture('testVideo.h264')
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
 #cap = cv2.VideoCapture('video.avi')
-#cap = cv2.VideoCapture('youtubeTest.h264')
+cap = cv2.VideoCapture('IVYrotate.mp4')
 
 # Trained XML classifiers describes some features of some object we want to detect 
 car_cascade = cv2.CascadeClassifier('cars.xml')
