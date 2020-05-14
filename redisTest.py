@@ -13,7 +13,9 @@ def setPicture(picture,imageCount):
 	#im = Image.open("/home/pi/carDetect/testMedia/testPictures/outTest1Fixed.jpg")
 	im = Image.open(picture)
 	im.save(output, format=im.format)
-
-	r=redis.StrictRedis(host='localhost',password='nokia123')
+#	RPI redis server does not have the password
+#	r=redis.StrictRedis(host='localhost',password='nokia123')
+	#r=redis.StrictRedis(host='localhost',password='')
+	r=redis.StrictRedis(host='192.168.1.108', password = 'project123'
 	r.set('imagedata%d' %imageCount, output.getvalue())
 	output.close()
