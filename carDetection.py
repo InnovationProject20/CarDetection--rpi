@@ -17,7 +17,9 @@ cap = cv2.VideoCapture('video.avi')
 
 # Trained XML classifiers describes some features of some object we want to detect 
 car_cascade = cv2.CascadeClassifier('cars.xml')
-
+r=redis.StrictRedis(host='192.168.1.108', password = 'project123')
+IDBytes = r.get('numberOfPi')
+ID = int.from_bytes(IDBytes,"big")-49
 imageCount = 0
 frameCount = 0
 
@@ -39,7 +41,7 @@ while (cap.isOpened()):
 			cv2.imwrite(tempFrame, frames)
 			ret,frames = cap.read()
 			print('Read a new image %s frame %d' % (tempFrame, ret))
-			redisTest.setPicture(tempFrame,imageCount)
+			redisTest.setPicture(tempFrame,imageCount, ID)
 			# remove the processed image file
 			os.remove(tempFrame)
 			imageCount +=1
