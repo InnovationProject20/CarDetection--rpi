@@ -7,7 +7,7 @@ from PIL import Image
 import redis
 from io import BytesIO
 
-def setPicture(picture,imageCount, ID):
+def setPicture(picture,imageCount):
 	#output = StringIO.StringIO(
 	output = BytesIO()
 	#im = Image.open("/home/pi/carDetect/testMedia/testPictures/outTest1Fixed.jpg")
@@ -17,5 +17,6 @@ def setPicture(picture,imageCount, ID):
 #	r=redis.StrictRedis(host='localhost',password='nokia123')
 	#r=redis.StrictRedis(host='localhost',password='')
 	r=redis.StrictRedis(host='192.168.1.108', password = 'project123')
+	ID = r.get('numberOfPi') - 1
 	r.set('Pi%dimagedata%d' %ID %imageCount, output.getvalue())
 	output.close()
