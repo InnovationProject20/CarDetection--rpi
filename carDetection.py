@@ -11,15 +11,17 @@ import redisTest
 
 # capture frames from a video
 #cap = cv2.VideoCapture('testVideo.h264')
-#cap = cv2.VideoCapture(0)
-cap = cv2.VideoCapture('video.avi')
+cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture('video.avi')
 #cap = cv2.VideoCapture('youtubeTest.h264')
 
 # Trained XML classifiers describes some features of some object we want to detect 
 car_cascade = cv2.CascadeClassifier('cars.xml')
 r=redis.StrictRedis(host='192.168.1.108', password = 'project123')
 IDBytes = r.get('numberOfPi')
-ID = int.from_bytes(IDBytes,"big")-49
+ID = int.from_bytes(IDBytes,"big") - 49
+r.set('numberOfPi', ID-1)
+
 imageCount = 0
 frameCount = 0
 
