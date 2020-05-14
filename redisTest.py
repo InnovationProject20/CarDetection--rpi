@@ -17,6 +17,7 @@ def setPicture(picture,imageCount):
 #	r=redis.StrictRedis(host='localhost',password='nokia123')
 	#r=redis.StrictRedis(host='localhost',password='')
 	r=redis.StrictRedis(host='192.168.1.108', password = 'project123')
-	ID = r.get('numberOfPi') - 1
+	ID = r.get('numberOfPi')
+	ID = (int)ID - 1
 	r.set('Pi%dimagedata%d' %ID %imageCount, output.getvalue())
 	output.close()
