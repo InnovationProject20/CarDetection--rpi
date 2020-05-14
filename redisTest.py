@@ -16,6 +16,6 @@ def setPicture(picture,imageCount, ID):
 #	RPI redis server does not have the password
 #	r=redis.StrictRedis(host='localhost',password='nokia123')
 	#r=redis.StrictRedis(host='localhost',password='')
-	r=redis.StrictRedis(host='192.168.1.108', password = 'project123')
-	r.set('Pi%dimagedata%d' %ID %imageCount, output.getvalue())
+	r = redis.StrictRedis(host = '192.168.1.108', password = 'project123')
+	r.set('Pi{0}imagedata{1}' .format(ID, imageCount), output.getvalue())
 	output.close()
