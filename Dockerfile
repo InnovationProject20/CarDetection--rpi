@@ -1,12 +1,20 @@
 FROM balenalib/raspberrypi3-debian:latest
-RUN sudo apt update
-RUN sudo apt upgrade
-RUN sudo apt install python3-opencv
-RUN sudo apt-get install python3-pip
-RUN sudo pip3 install pillow
-RUN sudo apt install redis-server
-RUN sudo pip3 install redis
-COPY ./ ./
-RUN python3 -c "import cv2; print(cv2.__version__)"
-RUN sudo service redis-server start 
-CMD ["python3", "./carDetection.py"]
+#FROM debian
+RUN apt-get clean -y && apt-get -y update && apt-get upgrade -y && apt-get install -y \
+wget less nano python3-opencv python3-pip redis-server redis-tools
+
+RUN pip3 install pillow 
+RUN pip3 install redis
+
+COPY ./ /root/.
+
+#RUN python3 -c "import cv2; print(cv2.__version__)"
+
+ADD ./start.sh /root/
+ADD ./carDetection.py /root/ 
+
+EXPOSE 6379
+
+RUN chmod +x /root/start.sh
+
+CMD ["/root/start.sh"]
